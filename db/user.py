@@ -3,9 +3,9 @@ from ormar import String, Integer, Model
 from .base_class import MetaClass
 
 
-class User(Model):
+class Buyer(Model):
     class Meta(MetaClass):
-        tablename = "user"
+        tablename = "buyer"
 
     id: int = Integer(primary_key=True)
     name: str = String(max_length=30, unique=True)
