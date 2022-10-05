@@ -1,5 +1,5 @@
 from typing import Optional, List
-from ormar import ForeignKey, Model, Integer
+from ormar import ForeignKey, Model, Integer, ManyToMany
 
 from .product import Product
 from .user import Buyer
@@ -12,4 +12,4 @@ class Basket(Model):
 
     id: int = Integer(primary_key=True)
     user_id: Optional[Buyer] = ForeignKey(Buyer, skip_reverse=True)
-    prudocts: Optional[Product] = ForeignKey(Product, skip_reverse=True)
+    products: Optional[List[Product]] = ManyToMany(Product, skip_reverse=True)

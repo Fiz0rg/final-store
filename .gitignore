@@ -1,7 +1,7 @@
 venv/
 idea/
 migrations/
-
+static/
 
 __pycache__
 

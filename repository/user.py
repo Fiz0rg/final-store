@@ -10,5 +10,6 @@ class UserRepository:
 
         new_user.password = hash_password(new_user.password)
         add = await BaseRepository.create_object(new_object=new_user, db_model=db_model)
-        user_basket = await Basket.objects.create(user_id=add.id)
+        await Basket.objects.create(user_id=add)
+
         return add
