@@ -1,6 +1,5 @@
 import datetime
 from typing import Union
-from unicodedata import name
 
 from jose import jwt, JWTError
 
