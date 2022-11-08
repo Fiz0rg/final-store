@@ -4,9 +4,10 @@ from typing import Union
 from jose import jwt, JWTError
 
 from fastapi import Depends, Security
+from fastapi.security import SecurityScopes, OAuth2PasswordBearer
 
 from passlib.context import CryptContext
-from fastapi.security import SecurityScopes, OAuth2PasswordBearer
+
 from pydantic import ValidationError
 
 from db.user import Buyer
@@ -78,6 +79,7 @@ async def get_current_user(
             raise credentials_exception(detail="Not enough permissions")
 
     return user
+
 
 
 

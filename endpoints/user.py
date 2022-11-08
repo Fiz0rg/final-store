@@ -1,9 +1,12 @@
 from datetime import timedelta
-import imp
 from typing import List
 
+from fastapi.security import OAuth2PasswordRequestForm
 from fastapi import APIRouter, Depends, HTTPException, Security
 from fastapi.security import OAuth2PasswordRequestForm
+
+from starlette.templating import Jinja2Templates
+from starlette.requests import Request
 
 from schemas.user import UserName, UserCreate
 from schemas.token import Token
@@ -12,8 +15,14 @@ from db.user import Buyer
 from repository.user import UserRepository
 from security.user import create_access_token, ACCESS_TOKEN_EXPIRE_MINUNES, authenticate_user, get_current_user
 
+templates = Jinja2Templates(directory="templates")
 
 router = APIRouter()
+
+
+@router.get('/')
+async def google_auth(request: Request):
+    return templates.TemplateResponse("auth.html", {"request": request})
 
 
 @router.get("/get_all", response_model=List[Buyer])
@@ -37,6 +46,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         expires_delta=access_token_expires,
     )
     return {"access_token": access_token, "token_type": "bearer"}
+
 
 
 @router.get("/users/me/", response_model=Buyer)
