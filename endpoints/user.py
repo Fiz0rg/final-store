@@ -3,7 +3,6 @@ from typing import List
 
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi import APIRouter, Depends, HTTPException, Security
-from fastapi.security import OAuth2PasswordRequestForm
 
 from starlette.templating import Jinja2Templates
 from starlette.requests import Request

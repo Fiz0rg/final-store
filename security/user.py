@@ -3,7 +3,7 @@ from typing import Union
 
 from jose import jwt, JWTError
 
-from fastapi import Depends, Security
+from fastapi import Depends
 from fastapi.security import SecurityScopes, OAuth2PasswordBearer
 
 from passlib.context import CryptContext
@@ -51,6 +51,7 @@ def create_access_token(data: dict, expires_delta: Union[datetime.timedelta, Non
         expire = datetime.datetime.utcnow() + datetime.timedelta(minutes=15)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    print(encoded_jwt)
     return encoded_jwt
 
 
@@ -68,6 +69,8 @@ async def get_current_user(
         if username is None:
             raise credentials_exception
         token_scopes = payload.get("scopes", [])
+        print(token_scopes)
+        print(type(token_scopes))
         token_data = TokenData(scopes=token_scopes, username=username)
     except (JWTError, ValidationError):
         raise credentials_exception

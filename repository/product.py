@@ -1,4 +1,3 @@
-from itertools import product
 from fastapi import HTTPException
 
 from db.category import Category
